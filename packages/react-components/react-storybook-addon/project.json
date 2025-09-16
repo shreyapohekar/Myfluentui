@@ -1,0 +1,29 @@
+{
+  "name": "react-storybook-addon",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/react-components/react-storybook-addon/src",
+  "tags": ["vNext", "platform:any", "tools"],
+  "implicitDependencies": [],
+  "targets": {
+    "build": {
+      "dependsOn": [
+        {
+          "projects": [
+            "react-aria",
+            "react-provider",
+            "react-button",
+            "react-menu",
+            "react-label",
+            "react-switch",
+            "react-text",
+            "react-link",
+            "react-utilities",
+            "react-theme"
+          ],
+          "target": "build"
+        }
+      ]
+    }
+  }
+}
