@@ -63,6 +63,7 @@ jobs:
       - name: Update Baseline
         id: update_pr_images
         run: |
+          touch test.png
           git add *.png
           if [[ -n $(git status --porcelain) ]]; then
             git commit -m "chore: update vrt baseline / triggered by PR comment"
