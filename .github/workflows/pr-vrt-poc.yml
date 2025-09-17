@@ -55,35 +55,6 @@ jobs:
           repository: ${{ steps.pr_details.outputs.result.repo.full_name }}
           fetch-depth: 0
 
-      - name: Debug2
-        run: |
-          echo "--base ${{ steps.pr_details.outputs.result.base.sha }} --head ${{ steps.pr_details.outputs.result.head.sha }}"
-          echo "===="
-          git status
-          echo '===='
-          ls -la packages/react-components/react-text/visual-regression
-        env:
-          W_RUN: ${{ toJSON(github.event) }}
-          PR_DETAILS: ${{steps.pr_details.outputs.result}}
-
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4.3.3
-        with:
-          main-branch-name: 'master'
-
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'yarn'
-          node-version: '20'
-
-      - run: yarn install --frozen-lockfile
-      - run: yarn playwright install --with-deps
-      - run: yarn nx run visual-regression-assert:build
-
-      - name: Update VR tests diff
-        id: update_diff
-        run: yarn nx affected -t test-vr-cli -u --nxBail --base ${{ steps.pr_details.outputs.result.base.sha }} --head ${{ steps.pr_details.outputs.result.head.sha }}
-
       - name: Configure Git
         run: |
           git config user.email "${{ github.actor }}@users.noreply.github.com"
