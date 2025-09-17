@@ -64,6 +64,7 @@ jobs:
         id: update_pr_images
         run: |
           touch test-$(date +%Y-%m-%d).png
+          echo "${{ github.event_name }}"
           echo "Head ref: ${{ github.event.pull_request.head.ref }}"
           echo "Base ref: ${{ github.event.pull_request.base.ref }}"
           git add *.png
