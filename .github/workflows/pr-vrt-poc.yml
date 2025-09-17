@@ -19,7 +19,7 @@ env:
 
 jobs:
   approve_vrt_diff:
-    if: github.repository_owner == 'microsoft' && github.event.issue.pull_request && contains(github.event.comment.body,'/approve-visual-regression-diff')
+    if: github.event.issue.pull_request && contains(github.event.comment.body,'/approve-visual-regression-diff')
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
